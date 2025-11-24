@@ -1036,169 +1036,171 @@
     © <span id="year"></span> MoveLink · Intermediario de mudanzas · Sitio web en GitHub Pages
   </footer>
 
-  <script>
-    // Año automático en el pie de página
-    document.getElementById("year").textContent = new Date().getFullYear();
+ <script>
+  // Año automático en el pie de página
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Calculadora de precio aproximado + pre-factura
-    function calcularPrecio() {
-      const tipo = document.getElementById("tipoMudanza").value;
-      const tamano = document.getElementById("tamanoMudanza").value;
-      const plantas = parseInt(document.getElementById("plantas").value || "0", 10);
-      const km = Math.max(1, parseInt(document.getElementById("kmAprox").value || "1", 10));
+  // Calculadora de precio aproximado + pre-factura (VERSIÓN ECONÓMICA)
+  function calcularPrecio() {
+    const tipo = document.getElementById("tipoMudanza").value;
+    const tamano = document.getElementById("tamanoMudanza").value;
+    const plantas = parseInt(document.getElementById("plantas").value || "0", 10);
+    const km = Math.max(1, parseInt(document.getElementById("kmAprox").value || "1", 10));
 
-      const extraMontaje = document.getElementById("extraMontaje").checked;
-      const extraEmbalaje = document.getElementById("extraEmbalaje").checked;
-      const extraUrgente = document.getElementById("extraUrgente").checked;
+    const extraMontaje = document.getElementById("extraMontaje").checked;
+    const extraEmbalaje = document.getElementById("extraEmbalaje").checked;
+    const extraUrgente = document.getElementById("extraUrgente").checked;
 
-      // Precio base según tipo de mudanza
-      let base;
-      if (tipo === "local") base = 120;
-      else if (tipo === "provincial") base = 230;
-      else base = 420; // nacional
+    // 🔹 Precio base más económico según tipo de mudanza
+    let base;
+    if (tipo === "local") base = 60;            // mudanza local o traslado de muebles
+    else if (tipo === "provincial") base = 130;
+    else base = 220;                            // nacional
 
-      // Factor por tamaño
-      let factorTamano = 1;
-      if (tamano === "media") factorTamano = 1.4;
-      if (tamano === "grande") factorTamano = 1.8;
+    // 🔹 Factor por tamaño (más suave)
+    let factorTamano = 1;
+    if (tamano === "media") factorTamano = 1.2;
+    if (tamano === "grande") factorTamano = 1.5;
 
-      // Ajuste por kilómetros (a partir de 10 km)
-      const kmExtra = Math.max(0, km - 10);
-      const costeKm = tipo === "local" ? 1 : tipo === "provincial" ? 1.3 : 1.6;
+    // 🔹 Ajuste por kilómetros (a partir de 10 km)
+    const kmExtra = Math.max(0, km - 10);
+    const costeKm =
+      tipo === "local" ? 0.5 :
+      tipo === "provincial" ? 0.8 :
+      1.0;
 
-      // Ajuste por plantas sin ascensor
-      let costePlantas = 0;
-      if (plantas === 1) costePlantas = 40;
-      if (plantas === 2) costePlantas = 80;
+    // 🔹 Ajuste por plantas sin ascensor (más barato)
+    let costePlantas = 0;
+    if (plantas === 1) costePlantas = 20;
+    if (plantas === 2) costePlantas = 40;
 
-      // Extras
-      let extras = 0;
-      if (extraMontaje) extras += 60;
-      if (extraEmbalaje) extras += 40;
-      if (extraUrgente) extras += 70;
+    // 🔹 Extras más económicos
+    let extras = 0;
+    if (extraMontaje) extras += 30;
+    if (extraEmbalaje) extras += 20;
+    if (extraUrgente) extras += 40;
 
-      let precio = base * factorTamano + kmExtra * costeKm + costePlantas + extras;
+    // Cálculo final
+    let precio = base * factorTamano + kmExtra * costeKm + costePlantas + extras;
 
-      // Redondeo “bonito”
-      precio = Math.round(precio / 10) * 10;
+    // Redondeo “bonito”
+    precio = Math.round(precio / 10) * 10;
 
-      const resultado = document.getElementById("resultadoPrecio");
-      resultado.innerHTML =
-        "Precio orientativo: <strong>desde " +
-        precio.toLocaleString("es-ES") +
-        " €</strong><br><span style='font-size:0.8rem;color:#065f46;'>El precio final lo confirmará siempre la empresa de mudanzas una vez revisados todos los detalles.</span>";
+    const resultado = document.getElementById("resultadoPrecio");
+    resultado.innerHTML =
+      "Precio orientativo: <strong>desde " +
+      precio.toLocaleString("es-ES") +
+      " €</strong><br><span style='font-size:0.8rem;color:#065f46;'>El precio final lo confirmará siempre la empresa de mudanzas una vez revisados todos los detalles.</span>";
 
-      // ---------- Pre-factura (desglose) ----------
-      const preformaBody = document.getElementById("preformaBody");
-      const preformaTotal = document.getElementById("preformaTotal");
+    // ---------- Pre-factura (desglose) ----------
+    const preformaBody = document.getElementById("preformaBody");
+    const preformaTotal = document.getElementById("preformaTotal");
 
-      // Desglose aproximado
-      const conceptos = [];
+    const conceptos = [];
 
-      const descTipo =
-        tipo === "local"
-          ? "Mudanza local"
-          : tipo === "provincial"
-          ? "Mudanza provincial"
-          : "Mudanza nacional";
+    // 💡 Aquí metemos lo de traslado de muebles (Conforama, etc.) para mudanza local
+    const descTipo =
+      tipo === "local"
+        ? "Mudanza local o traslado de muebles desde tienda (Conforama, etc.) dentro de la comarca de Pamplona"
+        : tipo === "provincial"
+        ? "Mudanza provincial"
+        : "Mudanza nacional";
 
-      const textoTamano =
-        tamano === "pequena"
-          ? "Mudanza pequeña"
-          : tamano === "media"
-          ? "Mudanza media"
-          : "Mudanza grande";
+    const textoTamano =
+      tamano === "pequena"
+        ? "Mudanza pequeña"
+        : tamano === "media"
+        ? "Mudanza media"
+        : "Mudanza grande";
 
-      const importeBase = Math.round(base * factorTamano);
+    const importeBase = Math.round(base * factorTamano);
 
+    conceptos.push({
+      concepto: "Servicio de mudanza / traslado",
+      detalle: descTipo + " · " + textoTamano,
+      importe: importeBase
+    });
+
+    if (kmExtra > 0) {
+      const importeKm = Math.round(kmExtra * costeKm);
       conceptos.push({
-        concepto: "Servicio de mudanza",
-        detalle: descTipo + " · " + textoTamano,
-        importe: importeBase
+        concepto: "Recorrido adicional",
+        detalle: kmExtra + " km extra aprox.",
+        importe: importeKm
       });
-
-      if (kmExtra > 0) {
-        const importeKm = Math.round(kmExtra * costeKm);
-        conceptos.push({
-          concepto: "Recorrido adicional",
-          detalle: kmExtra + " km extra aprox.",
-          importe: importeKm
-        });
-      }
-
-      if (costePlantas > 0) {
-        conceptos.push({
-          concepto: "Plantas sin ascensor",
-          detalle: plantas === 1 ? "1ª–2ª planta" : "3ª planta o más",
-          importe: costePlantas
-        });
-      }
-
-      if (extraMontaje) {
-        conceptos.push({
-          concepto: "Desmontaje/montaje muebles",
-          detalle: "Servicio adicional",
-          importe: 60
-        });
-      }
-      if (extraEmbalaje) {
-        conceptos.push({
-          concepto: "Material de embalaje",
-          detalle: "Cajas, plástico, protecciones",
-          importe: 40
-        });
-      }
-      if (extraUrgente) {
-        conceptos.push({
-          concepto: "Servicio urgente / festivo",
-          detalle: "Prioridad alta / fin de semana",
-          importe: 70
-        });
-      }
-
-      // Pintar tabla
-      preformaBody.innerHTML = "";
-      conceptos.forEach(function (c) {
-        const tr = document.createElement("tr");
-        const td1 = document.createElement("td");
-        const td2 = document.createElement("td");
-        const td3 = document.createElement("td");
-        td1.textContent = c.concepto;
-        td2.textContent = c.detalle;
-        td3.textContent = c.importe.toLocaleString("es-ES") + " €";
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        preformaBody.appendChild(tr);
-      });
-
-      preformaTotal.textContent = "Total orientativo: " + precio.toLocaleString("es-ES") + " €";
     }
 
-    // Enviar solicitud a WhatsApp con los datos del formulario
-    function enviarSolicitudWhatsApp() {
-      const nombre = document.getElementById("solNombre").value.trim();
-      const telefono = document.getElementById("solTelefono").value.trim();
-      const origen = document.getElementById("solOrigen").value.trim();
-      const destino = document.getElementById("solDestino").value.trim();
-      const fecha = document.getElementById("solFecha").value;
-      const tamano = document.getElementById("solTamano").value;
-      const detalles = document.getElementById("solDetalles").value.trim();
-
-      let mensaje = "Solicitud de mudanza desde la web MoveLink:%0A%0A";
-      if (nombre) mensaje += "Nombre: " + nombre + "%0A";
-      if (telefono) mensaje += "Teléfono: " + telefono + "%0A";
-      if (origen) mensaje += "Origen: " + origen + "%0A";
-      if (destino) mensaje += "Destino: " + destino + "%0A";
-      if (fecha) mensaje += "Fecha aproximada: " + fecha + "%0A";
-      if (tamano) mensaje += "Tamaño mudanza: " + tamano + "%0A";
-      if (detalles) mensaje += "%0ADetalles adicionales: " + encodeURIComponent(detalles) + "%0A";
-
-      mensaje += "%0AEnvío esta información para que me orientéis con precios y opciones de mudanza.";
-
-      const url = "https://wa.me/34695465862?text=" + mensaje;
-      window.open(url, "_blank");
+    if (costePlantas > 0) {
+      conceptos.push({
+        concepto: "Plantas sin ascensor",
+        detalle: plantas === 1 ? "1ª–2ª planta" : "3ª planta o más",
+        importe: costePlantas
+      });
     }
-  </script>
-</body>
-</html>
+
+    if (extraMontaje) {
+      conceptos.push({
+        concepto: "Desmontaje/montaje muebles",
+        detalle: "Servicio adicional",
+        importe: 30
+      });
+    }
+    if (extraEmbalaje) {
+      conceptos.push({
+        concepto: "Material de embalaje",
+        detalle: "Cajas, plástico, protecciones",
+        importe: 20
+      });
+    }
+    if (extraUrgente) {
+      conceptos.push({
+        concepto: "Servicio urgente / festivo",
+        detalle: "Prioridad alta / fin de semana",
+        importe: 40
+      });
+    }
+
+    // Pintar tabla
+    preformaBody.innerHTML = "";
+    conceptos.forEach(function (c) {
+      const tr = document.createElement("tr");
+      const td1 = document.createElement("td");
+      const td2 = document.createElement("td");
+      const td3 = document.createElement("td");
+      td1.textContent = c.concepto;
+      td2.textContent = c.detalle;
+      td3.textContent = c.importe.toLocaleString("es-ES") + " €";
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      preformaBody.appendChild(tr);
+    });
+
+    preformaTotal.textContent = "Total orientativo: " + precio.toLocaleString("es-ES") + " €";
+  }
+
+  // Enviar solicitud a WhatsApp con los datos del formulario
+  function enviarSolicitudWhatsApp() {
+    const nombre = document.getElementById("solNombre").value.trim();
+    const telefono = document.getElementById("solTelefono").value.trim();
+    const origen = document.getElementById("solOrigen").value.trim();
+    const destino = document.getElementById("solDestino").value.trim();
+    const fecha = document.getElementById("solFecha").value;
+    const tamano = document.getElementById("solTamano").value;
+    const detalles = document.getElementById("solDetalles").value.trim();
+
+    let mensaje = "Solicitud de mudanza desde la web MoveLink:%0A%0A";
+    if (nombre) mensaje += "Nombre: " + nombre + "%0A";
+    if (telefono) mensaje += "Teléfono: " + telefono + "%0A";
+    if (origen) mensaje += "Origen: " + origen + "%0A";
+    if (destino) mensaje += "Destino: " + destino + "%0A";
+    if (fecha) mensaje += "Fecha aproximada: " + fecha + "%0A";
+    if (tamano) mensaje += "Tamaño mudanza: " + tamano + "%0A";
+    if (detalles) mensaje += "%0ADetalles adicionales: " + encodeURIComponent(detalles) + "%0A";
+
+    mensaje += "%0AEnvío esta información para que me orientéis con precios y opciones de mudanza.";
+
+    const url = "https://wa.me/34695465862?text=" + mensaje;
+    window.open(url, "_blank");
+  }
+</script>
