@@ -1,11 +1,604 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>MoveLink – Prueba online</title>
+  <meta charset="UTF-8" />
+  <title>MoveLink – Tu enlace para mudanzas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MoveLink conecta clientes con empresas de mudanzas de confianza. Tú pides, nosotros encontramos el proveedor adecuado.">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #f5f5f7;
+      color: #111827;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      background: linear-gradient(135deg, #111827, #0f766e);
+      color: #f9fafb;
+      padding: 1rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-container {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .logo span.icon {
+      background: #22c55e;
+      color: #022c22;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      opacity: 0.9;
+    }
+
+    nav a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .btn-nav {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #a7f3d0;
+      font-size: 0.9rem;
+      background: #22c55e;
+      color: #022c22;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0,1.6fr) minmax(0,1.2fr);
+      gap: 2rem;
+      align-items: center;
+      padding: 2.5rem 1.25rem 2rem;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.1rem, 4vw, 2.8rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-text h1 span {
+      color: #0f766e;
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+      max-width: 32rem;
+      margin-bottom: 1.3rem;
+      color: #4b5563;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .badge {
+      background: #ecfdf5;
+      color: #065f46;
+      border-radius: 999px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.8rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: #22c55e;
+      border: none;
+      border-radius: 999px;
+      padding: 0.7rem 1.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #022c22;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border-radius: 999px;
+      padding: 0.7rem 1.2rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.95rem;
+      cursor: pointer;
+      color: #374151;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.4rem;
+    }
+
+    .hero-card {
+      background: #ffffff;
+      border-radius: 1.2rem;
+      padding: 1.4rem 1.3rem;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.15);
+      border: 1px solid #e5e7eb;
+    }
+
+    .hero-card h2 {
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .steps {
+      list-style: none;
+      margin: 0.5rem 0 0.8rem;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    .steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .steps span.num {
+      background: #0f766e;
+      color: #e5f9f4;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.45rem;
+      margin-top: 0.15rem;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #6b7280;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-card-footer {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.6rem;
+      border-top: 1px dashed #e5e7eb;
+      padding-top: 0.6rem;
+    }
+
+    /* SECTIONS */
+    section {
+      margin-top: 2.5rem;
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-intro {
+      color: #4b5563;
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+      max-width: 40rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.1rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 14px rgba(148, 163, 184, 0.15);
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: #0f766e;
+      background: #ecfdf5;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 0.4rem;
+    }
+
+    .list {
+      list-style: none;
+      padding-left: 0;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .list li {
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    .list li::before {
+      content: "•";
+      color: #10b981;
+      font-size: 1rem;
+      line-height: 1.2;
+      margin-top: -2px;
+    }
+
+    /* CONTACTO */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr);
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .contact-box {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 1.2rem;
+      border: 1px solid #d1d5db;
+      box-shadow: 0 6px 18px rgba(148, 163, 184, 0.35);
+    }
+
+    .contact-box h3 {
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-box p {
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-details {
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-details strong {
+      display: inline-block;
+      width: 4.5rem;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #22c55e;
+      color: #022c22;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.45);
+    }
+
+    .whatsapp-btn span.icon {
+      font-size: 1.1rem;
+    }
+
+    .small-note {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6b7280;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 800px) {
+      header {
+        position: static;
+      }
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 1.4rem;
+      }
+      .hero-card {
+        order: -1;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>MoveLink está funcionando ✅</h1>
-  <p>Si ves este texto, tu página de GitHub Pages está activa.</p>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        MoveLink
+        <span class="icon">✓</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#ventajas">Ventajas</a></li>
+          <li><a href="#contacto" class="btn-nav">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <div class="hero-tag">Intermediario de mudanzas</div>
+        <h1>MoveLink está funcionando <span>✅</span></h1>
+        <p>
+          Conectamos a personas que necesitan mudarse con empresas de mudanzas de confianza.
+          Tú explicas tu necesidad y nosotros buscamos el proveedor adecuado para ti.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge">Sin compromiso</span>
+          <span class="badge">Ahorra tiempo comparando</span>
+          <span class="badge">Mudanzas locales y nacionales</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#contacto">
+            <button class="btn-primary">Quiero pedir información</button>
+          </a>
+          <a href="#como-funciona">
+            <button class="btn-secondary">Ver cómo funciona</button>
+          </a>
+        </div>
+        <p class="hero-note">
+          Servicio pensado para personas, familias y pequeñas empresas que quieren una mudanza sencilla.
+        </p>
+      </div>
+
+      <aside class="hero-card">
+        <h2>¿Cómo funciona MoveLink?</h2>
+        <ul class="steps">
+          <li>
+            <span class="num">1</span>
+            <span>Nos cuentas cuándo, desde dónde y hacia dónde te quieres mudar.</span>
+          </li>
+          <li>
+            <span class="num">2</span>
+            <span>Buscamos entre empresas de mudanzas de confianza la opción que mejor encaje.</span>
+          </li>
+          <li>
+            <span class="num">3</span>
+            <span>Te ponemos en contacto con el proveedor para que cerréis los detalles.</span>
+          </li>
+        </ul>
+        <div class="hero-card-footer">
+          MoveLink actúa como enlace entre el cliente y la empresa de mudanzas, ayudando a que todo el proceso sea más claro y organizado.
+        </div>
+      </aside>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section id="como-funciona">
+      <h2>Cómo trabajamos contigo</h2>
+      <p class="section-intro">
+        Nuestro objetivo es que tu mudanza sea más sencilla. Nos encargamos de escuchar lo que necesitas
+        y de ayudarte a encontrar una empresa de mudanzas que encaje con tu situación.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>1. Escuchamos tu caso</h3>
+          <p>Tipo de vivienda, volumen aproximado, fechas y direcciones. Cuanta más información nos des, mejor podremos ayudarte.</p>
+        </div>
+        <div class="card">
+          <h3>2. Buscamos opciones</h3>
+          <p>Hablamos con empresas de mudanzas de confianza y filtramos las que se ajustan a tu necesidad y a tu presupuesto.</p>
+        </div>
+        <div class="card">
+          <h3>3. Te conectamos con el proveedor</h3>
+          <p>Te ponemos en contacto con la empresa para que podáis cerrar precio, horarios y cualquier detalle especial.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios">
+      <h2>Servicios que puedes gestionar con MoveLink</h2>
+      <p class="section-intro">
+        No realizamos la mudanza directamente, pero sí te acompañamos para encontrar la opción adecuada.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <span class="pill">Mudanzas de hogar</span>
+          <h3>Pisos y viviendas</h3>
+          <p>Te ayudamos a encontrar empresas para mudanzas completas de pisos, trasteros o cambios de vivienda dentro de la misma ciudad o a otra provincia.</p>
+        </div>
+        <div class="card">
+          <span class="pill">Negocio y oficina</span>
+          <h3>Pequeñas empresas</h3>
+          <p>Si tienes un pequeño negocio y necesitas mover material, mobiliario o equipamiento, buscamos proveedores que se adapten a tu actividad.</p>
+        </div>
+        <div class="card">
+          <span class="pill">Servicios extra</span>
+          <h3>Apoyos adicionales</h3>
+          <p>Consulta por servicios como desmontaje y montaje de muebles, subida a pisos sin ascensor o mudanzas con varias paradas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VENTAJAS -->
+    <section id="ventajas">
+      <h2>¿Por qué usar MoveLink?</h2>
+      <p class="section-intro">
+        Sabemos que organizar una mudanza puede ser estresante. Nuestro papel es ayudarte a que todo sea más claro y sencillo.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Ahorro de tiempo</h3>
+          <ul class="list">
+            <li>No tienes que llamar a muchas empresas para explicar lo mismo.</li>
+            <li>Centralizamos la información básica de tu mudanza.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Comunicación clara</h3>
+          <ul class="list">
+            <li>Te ayudamos a definir bien qué necesitas para evitar sorpresas.</li>
+            <li>Conectamos solo con proveedores que puedan cubrir tu caso.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Acompañamiento</h3>
+          <ul class="list">
+            <li>MoveLink está pensado para personas que quieren sentirse acompañadas en el proceso.</li>
+            <li>Nos tomamos tu mudanza como si fuera nuestra.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <h2>Contacto MoveLink</h2>
+      <p class="section-intro">
+        Cuéntanos brevemente qué tipo de mudanza necesitas y te diremos cómo podemos ayudarte a encontrar empresa.
+      </p>
+
+      <div class="contact-wrapper">
+        <div class="contact-box">
+          <h3>Escríbenos por WhatsApp</h3>
+          <p>
+            Envíanos un mensaje con esta información:
+          </p>
+          <ul class="list">
+            <li>Ciudad de origen y ciudad de destino.</li>
+            <li>Tipo de vivienda (piso, casa, trastero, oficina…).</li>
+            <li>Fecha aproximada de la mudanza.</li>
+            <li>Si necesitas desmontaje/montaje de muebles o servicios extra.</li>
+          </ul>
+
+          <a class="whatsapp-btn" href="https://wa.me/34695465862" target="_blank" rel="noopener">
+            <span class="icon">💬</span>
+            Hablar por WhatsApp
+          </a>
+
+          <p class="small-note">
+            Al hacer clic se abrirá una conversación directa con MoveLink en WhatsApp.
+          </p>
+        </div>
+
+        <div class="contact-box">
+          <h3>Otros datos de contacto</h3>
+          <p>Si lo prefieres, también puedes llamarnos o escribirnos directamente.</p>
+          <div class="contact-details">
+            <p><strong>Tel.:</strong> +34 695 465 862</p>
+            <p><strong>Nombre:</strong> Ricardo Alberto Conforme Aspiazu</p>
+          </div>
+          <p class="small-note">
+            MoveLink actúa como intermediario entre el cliente y la empresa de mudanzas. El servicio final de transporte
+            lo realiza siempre la empresa de mudanzas que acepte el trabajo.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> MoveLink · Intermediario de mudanzas · Sitio web en GitHub Pages
+  </footer>
+
+  <script>
+    // Año automático en el pie de página
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
