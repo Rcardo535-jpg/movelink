@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>MoveLink – Tu enlace para mudanzas</title>
+  <title>MoveLink – Intermediario de mudanzas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="MoveLink conecta clientes con empresas de mudanzas de confianza. Tú pides, nosotros encontramos el proveedor adecuado.">
+  <meta name="description" content="MoveLink conecta clientes con empresas de mudanzas de confianza. Calcula tu precio orientativo y solicita el servicio de forma fácil.">
   <style>
     * {
       box-sizing: border-box;
@@ -59,6 +59,7 @@
       justify-content: center;
       font-size: 0.8rem;
       font-weight: 700;
+      color: #f9fafb;
     }
 
     .brand-logo img {
@@ -70,14 +71,20 @@
 
     .brand-text {
       display: flex;
+      flex-direction: column;
+      gap: 0.05rem;
+    }
+
+    .brand-name {
+      display: flex;
       align-items: center;
       gap: 0.35rem;
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       letter-spacing: 0.03em;
     }
 
-    .brand-text span.icon {
+    .brand-name span.icon {
       background: #22c55e;
       color: #022c22;
       display: inline-flex;
@@ -88,11 +95,19 @@
       font-size: 0.9rem;
     }
 
+    .brand-sub {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.8;
+    }
+
     nav ul {
       list-style: none;
       display: flex;
       gap: 1rem;
       font-size: 0.9rem;
+      align-items: center;
     }
 
     nav a {
@@ -321,7 +336,7 @@
       margin-top: -2px;
     }
 
-    /* CALCULADORA */
+    /* CALCULADORA + PREFORMA */
     .calc-wrapper {
       display: grid;
       grid-template-columns: minmax(0,1.6fr) minmax(0,1.2fr);
@@ -366,7 +381,7 @@
       color: #374151;
     }
 
-    select, input[type="number"] {
+    select, input[type="number"], input[type="text"], input[type="date"] {
       padding: 0.4rem 0.55rem;
       border-radius: 0.6rem;
       border: 1px solid #d1d5db;
@@ -375,7 +390,9 @@
     }
 
     select:focus,
-    input[type="number"]:focus {
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    input[type="date"]:focus {
       border-color: #22c55e;
       box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.2);
     }
@@ -411,6 +428,102 @@
       margin-top: 0.45rem;
       font-size: 0.8rem;
       color: #6b7280;
+    }
+
+    .preforma-box {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 1.1rem 1.1rem 1.2rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 6px 18px rgba(148, 163, 184, 0.35);
+      font-size: 0.9rem;
+    }
+
+    .preforma-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .preforma-header h3 {
+      font-size: 1rem;
+    }
+
+    .preforma-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.4rem 0 0.6rem;
+      font-size: 0.85rem;
+    }
+
+    .preforma-table th,
+    .preforma-table td {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0.35rem 0.2rem;
+      text-align: left;
+    }
+
+    .preforma-table th {
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    .preforma-total {
+      text-align: right;
+      font-weight: 700;
+      margin-top: 0.4rem;
+    }
+
+    .preforma-small {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    /* FORMULARIO SOLICITAR */
+    .solicitar-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0,1.4fr) minmax(0,1.1fr);
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .solicitar-box {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 1.2rem;
+      border: 1px solid #d1d5db;
+      box-shadow: 0 6px 18px rgba(148, 163, 184, 0.35);
+      font-size: 0.9rem;
+    }
+
+    .solicitar-grid {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 0.8rem 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .solicitar-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 70px;
+      resize: vertical;
+      padding: 0.4rem 0.55rem;
+      border-radius: 0.6rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.2);
     }
 
     /* CONTACTO */
@@ -472,6 +585,40 @@
       color: #6b7280;
     }
 
+    /* QR */
+    .qr-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0,1.6fr) minmax(0,1fr);
+      gap: 1.5rem;
+      align-items: center;
+      margin-top: 2.5rem;
+    }
+
+    .qr-card {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 1.2rem 1.3rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 6px 18px rgba(148, 163, 184, 0.35);
+      font-size: 0.9rem;
+    }
+
+    .qr-img-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .qr-img-box img {
+      max-width: 230px;
+      width: 100%;
+      height: auto;
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      padding: 0.5rem;
+      background: #ffffff;
+    }
+
     footer {
       margin-top: 3rem;
       padding: 1.5rem;
@@ -504,10 +651,10 @@
       .grid-3 {
         grid-template-columns: 1fr;
       }
-      .contact-wrapper {
-        grid-template-columns: 1fr;
-      }
-      .calc-wrapper {
+      .contact-wrapper,
+      .calc-wrapper,
+      .solicitar-wrapper,
+      .qr-wrapper {
         grid-template-columns: 1fr;
       }
     }
@@ -520,21 +667,22 @@
     <div class="nav-container">
       <div class="brand">
         <div class="brand-logo">
-          <!-- Sustituye la imagen si quieres usar tu logo -->
-          <!-- Sube tu archivo a /docs como logo-movelink.png -->
+          <!-- Sube tu logo como docs/logo-movelink.png -->
           <img src="logo-movelink.png" alt="Logo MoveLink" onerror="this.style.display='none';this.parentElement.textContent='ML';">
         </div>
         <div class="brand-text">
-          MoveLink
-          <span class="icon">✓</span>
+          <div class="brand-name">
+            MoveLink <span class="icon">✓</span>
+          </div>
+          <div class="brand-sub">Intermediario de mudanzas</div>
         </div>
       </div>
       <nav>
         <ul>
           <li><a href="#como-funciona">Cómo funciona</a></li>
           <li><a href="#servicios">Servicios</a></li>
-          <li><a href="#ventajas">Ventajas</a></li>
           <li><a href="#calculadora">Precio aproximado</a></li>
+          <li><a href="#solicitar">Solicitar servicio</a></li>
           <li><a href="#contacto" class="btn-nav">Contacto</a></li>
         </ul>
       </nav>
@@ -554,20 +702,20 @@
 
         <div class="hero-badges">
           <span class="badge">Sin compromiso</span>
-          <span class="badge">Ahorra tiempo comparando</span>
+          <span class="badge">Precios orientativos asequibles</span>
           <span class="badge">Mudanzas locales y nacionales</span>
         </div>
 
         <div class="hero-actions">
-          <a href="#contacto">
-            <button class="btn-primary">Quiero pedir información</button>
+          <a href="#calculadora">
+            <button class="btn-primary">Calcular precio orientativo</button>
           </a>
-          <a href="#como-funciona">
-            <button class="btn-secondary">Ver cómo funciona</button>
+          <a href="#solicitar">
+            <button class="btn-secondary">Solicitar servicio</button>
           </a>
         </div>
         <p class="hero-note">
-          Servicio pensado para personas, familias y pequeñas empresas que quieren una mudanza sencilla.
+          Servicio pensado para personas, familias y pequeñas empresas que quieren una mudanza sencilla y clara desde el principio.
         </p>
       </div>
 
@@ -580,11 +728,11 @@
           </li>
           <li>
             <span class="num">2</span>
-            <span>Buscamos entre empresas de mudanzas de confianza la opción que mejor encaje.</span>
+            <span>Buscamos opciones entre empresas de mudanzas de confianza.</span>
           </li>
           <li>
             <span class="num">3</span>
-            <span>Te ponemos en contacto con el proveedor para que cerréis los detalles.</span>
+            <span>Te conectamos con el proveedor para que cerréis precio y detalles.</span>
           </li>
         </ul>
         <div class="hero-card-footer">
@@ -621,14 +769,14 @@
     <section id="servicios">
       <h2>Servicios que puedes gestionar con MoveLink</h2>
       <p class="section-intro">
-        No realizamos la mudanza directamente, pero sí te acompañamos para encontrar la opción adecuada.
+        No realizamos la mudanza directamente, pero sí te acompañamos para encontrar la opción adecuada, con precios claros y explicados.
       </p>
 
       <div class="grid-3">
         <div class="card">
           <span class="pill">Mudanzas de hogar</span>
           <h3>Pisos y viviendas</h3>
-          <p>Te ayudamos a encontrar empresas para mudanzas completas de pisos, trasteros o cambios de vivienda dentro de la misma ciudad o a otra provincia.</p>
+          <p>Mudanzas completas de pisos, trasteros o cambios de vivienda dentro de la misma ciudad o a otra provincia.</p>
         </div>
         <div class="card">
           <span class="pill">Negocio y oficina</span>
@@ -638,55 +786,23 @@
         <div class="card">
           <span class="pill">Servicios extra</span>
           <h3>Apoyos adicionales</h3>
-          <p>Consulta por servicios como desmontaje y montaje de muebles, subida a pisos sin ascensor o mudanzas con varias paradas.</p>
+          <p>Desmontaje y montaje de muebles, subida a pisos sin ascensor, mudanzas con varias paradas y otros extras.</p>
         </div>
       </div>
     </section>
 
-    <!-- VENTAJAS -->
-    <section id="ventajas">
-      <h2>¿Por qué usar MoveLink?</h2>
-      <p class="section-intro">
-        Sabemos que organizar una mudanza puede ser estresante. Nuestro papel es ayudarte a que todo sea más claro y sencillo.
-      </p>
-
-      <div class="grid-3">
-        <div class="card">
-          <h3>Ahorro de tiempo</h3>
-          <ul class="list">
-            <li>No tienes que llamar a muchas empresas para explicar lo mismo.</li>
-            <li>Centralizamos la información básica de tu mudanza.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Comunicación clara</h3>
-          <ul class="list">
-            <li>Te ayudamos a definir bien qué necesitas para evitar sorpresas.</li>
-            <li>Conectamos solo con proveedores que puedan cubrir tu caso.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Acompañamiento</h3>
-          <ul class="list">
-            <li>MoveLink está pensado para personas que quieren sentirse acompañadas en el proceso.</li>
-            <li>Nos tomamos tu mudanza como si fuera nuestra.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- CALCULADORA -->
+    <!-- CALCULADORA + PREFORMA -->
     <section id="calculadora">
       <h2>Calcula tu precio aproximado</h2>
       <p class="section-intro">
-        Esta calculadora te da una idea orientativa del coste de tu mudanza. El precio final siempre lo confirmará
-        la empresa de mudanzas que acepte el trabajo.
+        Esta calculadora te da una idea orientativa del coste de tu mudanza. A partir de aquí, podemos preparar una
+        <strong>pre-factura sencilla</strong> y buscar la empresa adecuada.
       </p>
 
       <div class="calc-wrapper">
         <div class="calc-box">
           <h3>Introduce los datos básicos</h3>
-          <p>Con esta información generamos un precio aproximado para que tengas una referencia.</p>
+          <p>Con esta información generamos un precio aproximado para que tengas una referencia con precios asequibles.</p>
 
           <div class="calc-grid">
             <div class="calc-field">
@@ -743,20 +859,100 @@
           </p>
         </div>
 
-        <div class="calc-box">
-          <h3>Cómo interpretar el resultado</h3>
-          <p>
-            El precio que verás es una estimación basada en:
+        <div class="preforma-box">
+          <div class="preforma-header">
+            <h3>Pre-factura orientativa</h3>
+            <span style="font-size:0.8rem;color:#6b7280;">No es factura final, solo estimación</span>
+          </div>
+
+          <table class="preforma-table">
+            <thead>
+              <tr>
+                <th>Concepto</th>
+                <th>Detalle</th>
+                <th>Importe aprox.</th>
+              </tr>
+            </thead>
+            <tbody id="preformaBody">
+              <tr>
+                <td colspan="3">Calcula tu precio para ver el desglose orientativo.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div id="preformaTotal" class="preforma-total"></div>
+          <p class="preforma-small">
+            Puedes usar esta pre-factura como referencia rápida para comparar opciones o para hablar con la empresa de mudanzas.
           </p>
-          <ul class="list">
-            <li>Un precio base según tipo de mudanza (local, provincial o nacional).</li>
-            <li>Un ajuste según el tamaño aproximado de la vivienda o carga.</li>
-            <li>Los kilómetros indicados y las plantas sin ascensor.</li>
-            <li>Los servicios extra que marques (montaje, embalaje, urgencias).</li>
-          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLICITAR SERVICIO -->
+    <section id="solicitar">
+      <h2>Solicitar servicio MoveLink</h2>
+      <p class="section-intro">
+        Si el precio orientativo encaja contigo, puedes enviarnos una solicitud con tus datos. Prepararemos la información y
+        te ayudaremos a encontrar la empresa de mudanzas adecuada.
+      </p>
+
+      <div class="solicitar-wrapper">
+        <div class="solicitar-box">
+          <h3>Formulario rápido</h3>
+          <p style="font-size:0.9rem;color:#4b5563;margin-bottom:0.7rem;">
+            Rellena estos campos y pulsa en <strong>“Enviar solicitud por WhatsApp”</strong>. Se abrirá WhatsApp con el mensaje preparado.
+          </p>
+
+          <div class="solicitar-grid">
+            <div class="solicitar-field">
+              <label for="solNombre">Nombre</label>
+              <input type="text" id="solNombre" placeholder="Tu nombre" />
+            </div>
+            <div class="solicitar-field">
+              <label for="solTelefono">Teléfono</label>
+              <input type="text" id="solTelefono" placeholder="Opcional (si quieres dejarlo)" />
+            </div>
+            <div class="solicitar-field">
+              <label for="solOrigen">Ciudad de origen</label>
+              <input type="text" id="solOrigen" placeholder="Ej. Pamplona" />
+            </div>
+            <div class="solicitar-field">
+              <label for="solDestino">Ciudad de destino</label>
+              <input type="text" id="solDestino" placeholder="Ej. Bilbao" />
+            </div>
+            <div class="solicitar-field">
+              <label for="solFecha">Fecha aproximada</label>
+              <input type="date" id="solFecha" />
+            </div>
+            <div class="solicitar-field">
+              <label for="solTamano">Tamaño de mudanza</label>
+              <select id="solTamano">
+                <option value="Pequeña">Pequeña</option>
+                <option value="Media">Media</option>
+                <option value="Grande">Grande</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="solicitar-field" style="margin-bottom:0.8rem;">
+            <label for="solDetalles">Detalles adicionales</label>
+            <textarea id="solDetalles" placeholder="Pisos sin ascensor, muebles especiales, horarios, etc."></textarea>
+          </div>
+
+          <button class="btn-primary" type="button" onclick="enviarSolicitudWhatsApp()">Enviar solicitud por WhatsApp</button>
           <p class="small-note" style="margin-top:0.5rem;">
-            Si el precio orientativo encaja contigo, escríbenos por WhatsApp y preparamos la información para buscar la empresa de mudanzas adecuada.
+            No estás contratando nada todavía. Solo es una solicitud de información para estudiar tu mudanza.
           </p>
+        </div>
+
+        <div class="solicitar-box">
+          <h3>¿Qué pasa después?</h3>
+          <ul class="list">
+            <li>Leemos tu mensaje y, si falta algo importante, te lo preguntamos.</li>
+            <li>Buscamos opciones entre empresas de mudanzas que encajen con tu caso.</li>
+            <li>Te explicamos las posibilidades y te ayudamos a hablar con la empresa elegida.</li>
+            <li>Siempre con precios claros y sin compromiso de contratar si no te convence.</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -765,7 +961,7 @@
     <section id="contacto">
       <h2>Contacto MoveLink</h2>
       <p class="section-intro">
-        Cuéntanos brevemente qué tipo de mudanza necesitas y te diremos cómo podemos ayudarte a encontrar empresa.
+        También puedes escribirnos directamente si prefieres explicarnos tu mudanza por WhatsApp o llamada.
       </p>
 
       <div class="contact-wrapper">
@@ -805,6 +1001,35 @@
         </div>
       </div>
     </section>
+
+    <!-- QR PARA SOLICITAR SERVICIO -->
+    <section id="qr">
+      <h2>Código QR para solicitar servicios</h2>
+      <p class="section-intro">
+        Escanea este código con tu móvil y te llevará directamente a la sección <strong>“Solicitar servicio”</strong> de esta página,
+        para que puedas rellenar el formulario o enviarnos un WhatsApp fácilmente.
+      </p>
+
+      <div class="qr-wrapper">
+        <div class="qr-card">
+          <h3>Ideal para tarjetas, furgoneta o carteles</h3>
+          <p>
+            Puedes descargar este código QR y usarlo en tarjetas, carteles o vinilos. Cualquier persona que lo escanee irá
+            directamente a la parte de la web donde puede solicitar el servicio MoveLink.
+          </p>
+          <p class="small-note" style="margin-top:0.6rem;">
+            Enlace del QR: <br>
+            <code>https://rcardo535-jpg.github.io/movelink/#solicitar</code>
+          </p>
+        </div>
+        <div class="qr-img-box">
+          <!-- QR generado desde un servicio público en tiempo real -->
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https%3A%2F%2Frcardo535-jpg.github.io%2Fmovelink%2F%23solicitar"
+            alt="QR MoveLink Solicitar servicio">
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -815,7 +1040,7 @@
     // Año automático en el pie de página
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Calculadora de precio aproximado
+    // Calculadora de precio aproximado + pre-factura
     function calcularPrecio() {
       const tipo = document.getElementById("tipoMudanza").value;
       const tamano = document.getElementById("tamanoMudanza").value;
@@ -862,6 +1087,117 @@
         "Precio orientativo: <strong>desde " +
         precio.toLocaleString("es-ES") +
         " €</strong><br><span style='font-size:0.8rem;color:#065f46;'>El precio final lo confirmará siempre la empresa de mudanzas una vez revisados todos los detalles.</span>";
+
+      // ---------- Pre-factura (desglose) ----------
+      const preformaBody = document.getElementById("preformaBody");
+      const preformaTotal = document.getElementById("preformaTotal");
+
+      // Desglose aproximado
+      const conceptos = [];
+
+      const descTipo =
+        tipo === "local"
+          ? "Mudanza local"
+          : tipo === "provincial"
+          ? "Mudanza provincial"
+          : "Mudanza nacional";
+
+      const textoTamano =
+        tamano === "pequena"
+          ? "Mudanza pequeña"
+          : tamano === "media"
+          ? "Mudanza media"
+          : "Mudanza grande";
+
+      const importeBase = Math.round(base * factorTamano);
+
+      conceptos.push({
+        concepto: "Servicio de mudanza",
+        detalle: descTipo + " · " + textoTamano,
+        importe: importeBase
+      });
+
+      if (kmExtra > 0) {
+        const importeKm = Math.round(kmExtra * costeKm);
+        conceptos.push({
+          concepto: "Recorrido adicional",
+          detalle: kmExtra + " km extra aprox.",
+          importe: importeKm
+        });
+      }
+
+      if (costePlantas > 0) {
+        conceptos.push({
+          concepto: "Plantas sin ascensor",
+          detalle: plantas === 1 ? "1ª–2ª planta" : "3ª planta o más",
+          importe: costePlantas
+        });
+      }
+
+      if (extraMontaje) {
+        conceptos.push({
+          concepto: "Desmontaje/montaje muebles",
+          detalle: "Servicio adicional",
+          importe: 60
+        });
+      }
+      if (extraEmbalaje) {
+        conceptos.push({
+          concepto: "Material de embalaje",
+          detalle: "Cajas, plástico, protecciones",
+          importe: 40
+        });
+      }
+      if (extraUrgente) {
+        conceptos.push({
+          concepto: "Servicio urgente / festivo",
+          detalle: "Prioridad alta / fin de semana",
+          importe: 70
+        });
+      }
+
+      // Pintar tabla
+      preformaBody.innerHTML = "";
+      conceptos.forEach(function (c) {
+        const tr = document.createElement("tr");
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        const td3 = document.createElement("td");
+        td1.textContent = c.concepto;
+        td2.textContent = c.detalle;
+        td3.textContent = c.importe.toLocaleString("es-ES") + " €";
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        preformaBody.appendChild(tr);
+      });
+
+      preformaTotal.textContent = "Total orientativo: " + precio.toLocaleString("es-ES") + " €";
+    }
+
+    // Enviar solicitud a WhatsApp con los datos del formulario
+    function enviarSolicitudWhatsApp() {
+      const nombre = document.getElementById("solNombre").value.trim();
+      const telefono = document.getElementById("solTelefono").value.trim();
+      const origen = document.getElementById("solOrigen").value.trim();
+      const destino = document.getElementById("solDestino").value.trim();
+      const fecha = document.getElementById("solFecha").value;
+      const tamano = document.getElementById("solTamano").value;
+      const detalles = document.getElementById("solDetalles").value.trim();
+
+      let mensaje = "Solicitud de mudanza desde la web MoveLink:%0A%0A";
+      if (nombre) mensaje += "Nombre: " + nombre + "%0A";
+      if (telefono) mensaje += "Teléfono: " + telefono + "%0A";
+      if (origen) mensaje += "Origen: " + origen + "%0A";
+      if (destino) mensaje += "Destino: " + destino + "%0A";
+      if (fecha) mensaje += "Fecha aproximada: " + fecha + "%0A";
+      if (tamano) mensaje += "Tamaño mudanza: " + tamano + "%0A";
+      if (detalles) mensaje += "%0ADetalles adicionales: " + encodeURIComponent(detalles) + "%0A";
+
+      mensaje += "%0AEnvío esta información para que me orientéis con precios y opciones de mudanza.";
+
+      const url = "https://wa.me/34695465862?text=" + mensaje;
+      window.open(url, "_blank");
     }
   </script>
 </body>
