@@ -2,228 +2,867 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>MOVE•LINK - Mudanzas fáciles con código QR</title>
+  <title>MoveLink – Tu enlace para mudanzas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="MOVE•LINK es tu intermediario de mudanzas: escanea un código QR, cuéntanos tu mudanza y calcula un presupuesto orientativo online.">
+  <meta name="description" content="MoveLink conecta clientes con empresas de mudanzas de confianza. Tú pides, nosotros encontramos el proveedor adecuado.">
   <style>
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; background: #f5f5f5; color: #222; }
-    header { background:#ffffff; border-bottom:1px solid #e0e0e0; padding:12px 18px; position:sticky; top:0; z-index:10; }
-    .top-bar { max-width:900px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .logo { font-weight:800; letter-spacing:1px; color:#1d3557; }
-    .sub { font-size:11px; text-transform:uppercase; letter-spacing:2px; color:#457b9d; }
-    .nav-links a { font-size:13px; margin-left:10px; text-decoration:none; color:#444; }
-    .nav-links a:hover { text-decoration:underline; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
 
-    main { max-width:900px; margin:0 auto; padding:20px 16px 40px; }
-    h1 { font-size:26px; margin-top:18px; color:#1d3557; }
-    h2 { font-size:20px; margin-bottom:8px; color:#1d3557; }
-    p { line-height:1.5; }
+    body {
+      background: #f3f4f6;
+      color: #111827;
+      line-height: 1.6;
+    }
 
-    .hero { background:linear-gradient(135deg,#1d3557,#457b9d); color:#fff; padding:26px 18px 30px; border-radius:18px; margin-top:18px; }
-    .hero small { font-size:11px; opacity:.9; letter-spacing:1px; text-transform:uppercase; }
-    .btns { margin-top:14px; display:flex; flex-wrap:wrap; gap:10px; }
-    .btn { padding:8px 16px; border-radius:999px; border:none; text-decoration:none; font-size:14px; cursor:pointer; display:inline-block; }
-    .primary { background:#f1faee; color:#1d3557; font-weight:600; }
-    .whatsapp { background:#25d366; color:#fff; font-weight:600; }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-    section { margin-top:28px; background:#ffffff; border-radius:14px; padding:16px 14px 18px; }
-    ol, ul { padding-left:18px; font-size:14px; }
+    header {
+      background: linear-gradient(135deg, #0f172a, #047857);
+      color: #f9fafb;
+      padding: 0.8rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-    label { display:block; font-size:13px; margin-bottom:3px; margin-top:8px; }
-    input, select, textarea { width:100%; padding:7px 9px; border-radius:7px; border:1px solid #d1d5db; font-size:14px; box-sizing:border-box; }
-    textarea { min-height:70px; }
-    .form-note { font-size:11px; color:#555; margin-top:8px; }
+    .nav-container {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
 
-    .calc-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-    @media (max-width:700px){ .calc-grid{ grid-template-columns:1fr; } }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
 
-    .calc-result { margin-top:12px; padding:10px; border-radius:10px; background:#f8fafc; border:1px solid #dbe2ea; font-size:14px; }
-    .calc-error { color:#b91c1c; font-size:12px; margin-top:4px; }
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #022c22;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
 
-    footer { font-size:11px; text-align:center; color:#777; margin-top:24px; }
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .brand-text {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-text span.icon {
+      background: #22c55e;
+      color: #022c22;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.1rem 0.45rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      opacity: 0.92;
+    }
+
+    nav a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .btn-nav {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #a7f3d0;
+      font-size: 0.9rem;
+      background: #22c55e;
+      color: #022c22;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0,1.6fr) minmax(0,1.2fr);
+      gap: 2rem;
+      align-items: center;
+      padding: 2.5rem 1.25rem 2rem;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.1rem, 4vw, 2.8rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-text h1 span {
+      color: #16a34a;
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+      max-width: 32rem;
+      margin-bottom: 1.3rem;
+      color: #4b5563;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .badge {
+      background: #ecfdf5;
+      color: #065f46;
+      border-radius: 999px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.8rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: #22c55e;
+      border: none;
+      border-radius: 999px;
+      padding: 0.7rem 1.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #022c22;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 0.7rem 1.2rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.95rem;
+      cursor: pointer;
+      color: #374151;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.4rem;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #6b7280;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-card {
+      background: #ffffff;
+      border-radius: 1.2rem;
+      padding: 1.4rem 1.3rem;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.15);
+      border: 1px solid #e5e7eb;
+    }
+
+    .hero-card h2 {
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .steps {
+      list-style: none;
+      margin: 0.5rem 0 0.8rem;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    .steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .steps span.num {
+      background: #0f766e;
+      color: #e5f9f4;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.45rem;
+      margin-top: 0.15rem;
+    }
+
+    .hero-card-footer {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.6rem;
+      border-top: 1px dashed #e5e7eb;
+      padding-top: 0.6rem;
+    }
+
+    /* SECTIONS */
+    section {
+      margin-top: 2.5rem;
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-intro {
+      color: #4b5563;
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+      max-width: 40rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.1rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 14px rgba(148, 163, 184, 0.15);
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: #0f766e;
+      background: #ecfdf5;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 0.4rem;
+    }
+
+    .list {
+      list-style: none;
+      padding-left: 0;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .list li {
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    .list li::before {
+      content: "•";
+      color: #10b981;
+      font-size: 1rem;
+      line-height: 1.2;
+      margin-top: -2px;
+    }
+
+    /* CALCULADORA */
+    .calc-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0,1.6fr) minmax(0,1.2fr);
+      gap: 1.6rem;
+      align-items: flex-start;
+    }
+
+    .calc-box {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 1.2rem 1.2rem 1.4rem;
+      border: 1px solid #d1d5db;
+      box-shadow: 0 7px 22px rgba(148, 163, 184, 0.4);
+    }
+
+    .calc-box h3 {
+      margin-bottom: 0.4rem;
+    }
+
+    .calc-box p {
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin-bottom: 0.8rem;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 0.8rem 1rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.9rem;
+    }
+
+    .calc-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      color: #374151;
+    }
+
+    select, input[type="number"] {
+      padding: 0.4rem 0.55rem;
+      border-radius: 0.6rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    select:focus,
+    input[type="number"]:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.2);
+    }
+
+    .calc-extras {
+      margin-bottom: 0.7rem;
+      font-size: 0.85rem;
+      color: #374151;
+    }
+
+    .calc-extras label {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .calc-btn {
+      margin-top: 0.2rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .calc-result {
+      background: #ecfdf5;
+      border-radius: 0.8rem;
+      padding: 0.8rem 0.9rem;
+      font-size: 0.9rem;
+      color: #065f46;
+      border: 1px solid #bbf7d0;
+    }
+
+    .calc-note {
+      margin-top: 0.45rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    /* CONTACTO */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr);
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .contact-box {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 1.2rem;
+      border: 1px solid #d1d5db;
+      box-shadow: 0 6px 18px rgba(148, 163, 184, 0.35);
+    }
+
+    .contact-box h3 {
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-box p {
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-details {
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-details strong {
+      display: inline-block;
+      width: 4.5rem;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #22c55e;
+      color: #022c22;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.45);
+    }
+
+    .whatsapp-btn span.icon {
+      font-size: 1.1rem;
+    }
+
+    .small-note {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6b7280;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 800px) {
+      header {
+        position: static;
+      }
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 1.4rem;
+      }
+      .hero-card {
+        order: -1;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .calc-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- HEADER -->
   <header>
-    <div class="top-bar">
-      <div>
-        <div class="logo">MOVE•LINK</div>
-        <div class="sub">Mudanzas & código QR</div>
+    <div class="nav-container">
+      <div class="brand">
+        <div class="brand-logo">
+          <!-- Sustituye la imagen si quieres usar tu logo -->
+          <!-- Sube tu archivo a /docs como logo-movelink.png -->
+          <img src="logo-movelink.png" alt="Logo MoveLink" onerror="this.style.display='none';this.parentElement.textContent='ML';">
+        </div>
+        <div class="brand-text">
+          MoveLink
+          <span class="icon">✓</span>
+        </div>
       </div>
-      <nav class="nav-links">
-        <a href="#como-funciona">Cómo funciona</a>
-        <a href="#presupuesto">Presupuesto online</a>
-        <a href="#formulario">Formulario</a>
-        <a href="#contacto">Contacto</a>
+      <nav>
+        <ul>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#ventajas">Ventajas</a></li>
+          <li><a href="#calculadora">Precio aproximado</a></li>
+          <li><a href="#contacto" class="btn-nav">Contacto</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <div class="hero">
-      <small>Intermediario de mudanzas</small>
-      <h1>Tu mudanza empieza con un código QR.</h1>
-      <p>Escanea el QR, cuéntanos tu mudanza y nosotros buscamos por ti las mejores opciones entre empresas de mudanza de confianza.</p>
-      <p style="font-size:13px; opacity:.9;">Ahora también puedes calcular un <strong>presupuesto orientativo online</strong> en menos de 1 minuto con precios competitivos.</p>
-      <div class="btns">
-        <a href="#presupuesto" class="btn primary">Calcular presupuesto online</a>
-        <a href="https://wa.me/34695465862?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20una%20mudanza." target="_blank" class="btn whatsapp">Hablar por WhatsApp</a>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <div class="hero-tag">Intermediario de mudanzas</div>
+        <h1>MoveLink está funcionando <span>✅</span></h1>
+        <p>
+          Conectamos a personas que necesitan mudarse con empresas de mudanzas de confianza.
+          Tú explicas tu necesidad y nosotros buscamos el proveedor adecuado para ti.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge">Sin compromiso</span>
+          <span class="badge">Ahorra tiempo comparando</span>
+          <span class="badge">Mudanzas locales y nacionales</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#contacto">
+            <button class="btn-primary">Quiero pedir información</button>
+          </a>
+          <a href="#como-funciona">
+            <button class="btn-secondary">Ver cómo funciona</button>
+          </a>
+        </div>
+        <p class="hero-note">
+          Servicio pensado para personas, familias y pequeñas empresas que quieren una mudanza sencilla.
+        </p>
       </div>
-    </div>
 
+      <aside class="hero-card">
+        <h2>¿Cómo funciona MoveLink?</h2>
+        <ul class="steps">
+          <li>
+            <span class="num">1</span>
+            <span>Nos cuentas cuándo, desde dónde y hacia dónde te quieres mudar.</span>
+          </li>
+          <li>
+            <span class="num">2</span>
+            <span>Buscamos entre empresas de mudanzas de confianza la opción que mejor encaje.</span>
+          </li>
+          <li>
+            <span class="num">3</span>
+            <span>Te ponemos en contacto con el proveedor para que cerréis los detalles.</span>
+          </li>
+        </ul>
+        <div class="hero-card-footer">
+          MoveLink actúa como enlace entre el cliente y la empresa de mudanzas, ayudando a que todo el proceso sea más claro y organizado.
+        </div>
+      </aside>
+    </section>
+
+    <!-- COMO FUNCIONA -->
     <section id="como-funciona">
-      <h2>¿Cómo funciona MOVE•LINK?</h2>
-      <ol>
-        <li>Escaneas el código QR en furgonetas, carteles o tarjetas.</li>
-        <li>Nos cuentas tu mudanza: origen, destino, fecha y tipo de vivienda.</li>
-        <li>Calculas un presupuesto orientativo online para hacerte una idea.</li>
-        <li>Buscamos opciones entre empresas de mudanza colaboradoras.</li>
-        <li>Tú eliges la opción que más te conviene y te acompañamos en el proceso.</li>
-      </ol>
-    </section>
-
-    <!-- PRESUPUESTO ONLINE -->
-    <section id="presupuesto">
-      <h2>Presupuesto online orientativo</h2>
-      <p style="font-size:14px;">
-        Rellena estos datos y te mostraremos un <strong>precio aproximado y competitivo</strong> de mudanza.  
-        El importe es orientativo; el presupuesto final puede variar según los detalles reales.
+      <h2>Cómo trabajamos contigo</h2>
+      <p class="section-intro">
+        Nuestro objetivo es que tu mudanza sea más sencilla. Nos encargamos de escuchar lo que necesitas
+        y de ayudarte a encontrar una empresa de mudanzas que encaje con tu situación.
       </p>
 
-      <form id="calc-form">
-        <div class="calc-grid">
-          <div>
-            <label for="km">Kilómetros totales del trayecto (ida)</label>
-            <input type="number" id="km" min="1" step="1" placeholder="Ej: 15" required>
-            <div id="km-error" class="calc-error" style="display:none;"></div>
-          </div>
-          <div>
-            <label for="tipo">Tipo de mudanza</label>
-            <select id="tipo" required>
-              <option value="">Selecciona una opción</option>
-              <option value="1.0">Mudanza pequeña (habitación / pocas cajas)</option>
-              <option value="1.4">Piso estándar (2–3 habitaciones)</option>
-              <option value="1.8">Piso grande / chalet</option>
-              <option value="2.0">Oficina / local</option>
-            </select>
-          </div>
-          <div>
-            <label for="planta">Planta sin ascensor (0 si hay ascensor)</label>
-            <input type="number" id="planta" min="0" max="8" step="1" placeholder="Ej: 0, 1, 2...">
-          </div>
-          <div>
-            <label for="extras">Volumen especial</label>
-            <select id="extras">
-              <option value="0">Sin especiales (normal)</option>
-              <option value="20">Con muebles grandes / desmontaje (+20€)</option>
-              <option value="30">Mucho volumen (+30€)</option>
-              <option value="50">Piano / piezas muy delicadas (+50€)</option>
-            </select>
-          </div>
+      <div class="grid-3">
+        <div class="card">
+          <h3>1. Escuchamos tu caso</h3>
+          <p>Tipo de vivienda, volumen aproximado, fechas y direcciones. Cuanta más información nos des, mejor podremos ayudarte.</p>
         </div>
-
-        <div style="margin-top:14px;">
-          <button type="submit" class="btn primary">Calcular presupuesto</button>
+        <div class="card">
+          <h3>2. Buscamos opciones</h3>
+          <p>Hablamos con empresas de mudanzas de confianza y filtramos las que se ajustan a tu necesidad y a tu presupuesto.</p>
         </div>
+        <div class="card">
+          <h3>3. Te conectamos con el proveedor</h3>
+          <p>Te ponemos en contacto con la empresa para que podáis cerrar precio, horarios y cualquier detalle especial.</p>
+        </div>
+      </div>
+    </section>
 
-        <div id="calc-result" class="calc-result" style="display:none;"></div>
-      </form>
-
-      <p class="form-note">
-        Este cálculo es un <strong>presupuesto pre-forma</strong> para orientarte.  
-        El precio final se confirmará por teléfono o WhatsApp después de revisar todos los detalles.
+    <!-- SERVICIOS -->
+    <section id="servicios">
+      <h2>Servicios que puedes gestionar con MoveLink</h2>
+      <p class="section-intro">
+        No realizamos la mudanza directamente, pero sí te acompañamos para encontrar la opción adecuada.
       </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <span class="pill">Mudanzas de hogar</span>
+          <h3>Pisos y viviendas</h3>
+          <p>Te ayudamos a encontrar empresas para mudanzas completas de pisos, trasteros o cambios de vivienda dentro de la misma ciudad o a otra provincia.</p>
+        </div>
+        <div class="card">
+          <span class="pill">Negocio y oficina</span>
+          <h3>Pequeñas empresas</h3>
+          <p>Si tienes un pequeño negocio y necesitas mover material, mobiliario o equipamiento, buscamos proveedores que se adapten a tu actividad.</p>
+        </div>
+        <div class="card">
+          <span class="pill">Servicios extra</span>
+          <h3>Apoyos adicionales</h3>
+          <p>Consulta por servicios como desmontaje y montaje de muebles, subida a pisos sin ascensor o mudanzas con varias paradas.</p>
+        </div>
+      </div>
     </section>
 
-    <!-- FORMULARIO DE CONTACTO / DATOS -->
-    <section id="formulario">
-      <h2>Solicita tu mudanza</h2>
-      <form>
-        <label>Nombre y apellidos</label>
-        <input type="text" placeholder="Ej: Juan Pérez" required>
-        <label>Teléfono</label>
-        <input type="tel" placeholder="Ej: 600 000 000" required>
-        <label>Email (opcional)</label>
-        <input type="email" placeholder="Ej: correo@ejemplo.com">
-        <label>Ciudad / zona de recogida</label>
-        <input type="text" placeholder="Ej: Pamplona, barrio Iturrama" required>
-        <label>Ciudad / zona de destino</label>
-        <input type="text" placeholder="Ej: Logroño, centro" required>
-        <label>Comentarios o detalles importantes</label>
-        <textarea placeholder="Ej: muebles grandes, subida a un 5º sin ascensor, desmontaje de armarios, etc."></textarea>
-        <p class="form-note">Un asesor de MOVE•LINK se pondrá en contacto contigo para explicarte opciones y próximos pasos.</p>
-      </form>
+    <!-- VENTAJAS -->
+    <section id="ventajas">
+      <h2>¿Por qué usar MoveLink?</h2>
+      <p class="section-intro">
+        Sabemos que organizar una mudanza puede ser estresante. Nuestro papel es ayudarte a que todo sea más claro y sencillo.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Ahorro de tiempo</h3>
+          <ul class="list">
+            <li>No tienes que llamar a muchas empresas para explicar lo mismo.</li>
+            <li>Centralizamos la información básica de tu mudanza.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Comunicación clara</h3>
+          <ul class="list">
+            <li>Te ayudamos a definir bien qué necesitas para evitar sorpresas.</li>
+            <li>Conectamos solo con proveedores que puedan cubrir tu caso.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Acompañamiento</h3>
+          <ul class="list">
+            <li>MoveLink está pensado para personas que quieren sentirse acompañadas en el proceso.</li>
+            <li>Nos tomamos tu mudanza como si fuera nuestra.</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <!-- CONTACTO DIRECTO -->
+    <!-- CALCULADORA -->
+    <section id="calculadora">
+      <h2>Calcula tu precio aproximado</h2>
+      <p class="section-intro">
+        Esta calculadora te da una idea orientativa del coste de tu mudanza. El precio final siempre lo confirmará
+        la empresa de mudanzas que acepte el trabajo.
+      </p>
+
+      <div class="calc-wrapper">
+        <div class="calc-box">
+          <h3>Introduce los datos básicos</h3>
+          <p>Con esta información generamos un precio aproximado para que tengas una referencia.</p>
+
+          <div class="calc-grid">
+            <div class="calc-field">
+              <label for="tipoMudanza">Tipo de mudanza</label>
+              <select id="tipoMudanza">
+                <option value="local">Dentro de la misma ciudad</option>
+                <option value="provincial">Dentro de la misma provincia</option>
+                <option value="nacional">Entre provincias / larga distancia</option>
+              </select>
+            </div>
+
+            <div class="calc-field">
+              <label for="tamanoMudanza">Tamaño aproximado</label>
+              <select id="tamanoMudanza">
+                <option value="pequena">Pequeña (habitación / estudio)</option>
+                <option value="media">Media (piso 2–3 habitaciones)</option>
+                <option value="grande">Grande (vivienda grande / oficina)</option>
+              </select>
+            </div>
+
+            <div class="calc-field">
+              <label for="plantas">Planta sin ascensor</label>
+              <select id="plantas">
+                <option value="0">Bajo / con ascensor</option>
+                <option value="1">1ª–2ª planta sin ascensor</option>
+                <option value="2">3ª planta o más sin ascensor</option>
+              </select>
+            </div>
+
+            <div class="calc-field">
+              <label for="kmAprox">Kilómetros aproximados</label>
+              <input id="kmAprox" type="number" min="1" value="10" />
+            </div>
+          </div>
+
+          <div class="calc-extras">
+            <strong>Extras opcionales:</strong>
+            <label><input type="checkbox" id="extraMontaje" /> Desmontaje y montaje de muebles</label>
+            <label><input type="checkbox" id="extraEmbalaje" /> Material de embalaje (cajas, plástico burbuja…)</label>
+            <label><input type="checkbox" id="extraUrgente" /> Servicio urgente / fin de semana</label>
+          </div>
+
+          <div class="calc-btn">
+            <button class="btn-primary" type="button" onclick="calcularPrecio()">Calcular precio aproximado</button>
+          </div>
+
+          <div id="resultadoPrecio" class="calc-result">
+            Introduce los datos y pulsa en “Calcular precio aproximado”.
+          </div>
+
+          <p class="calc-note">
+            Este resultado es una orientación para ayudarte a decidir. El precio final puede variar en función del volumen real,
+            accesos, horarios y condiciones específicas de cada mudanza.
+          </p>
+        </div>
+
+        <div class="calc-box">
+          <h3>Cómo interpretar el resultado</h3>
+          <p>
+            El precio que verás es una estimación basada en:
+          </p>
+          <ul class="list">
+            <li>Un precio base según tipo de mudanza (local, provincial o nacional).</li>
+            <li>Un ajuste según el tamaño aproximado de la vivienda o carga.</li>
+            <li>Los kilómetros indicados y las plantas sin ascensor.</li>
+            <li>Los servicios extra que marques (montaje, embalaje, urgencias).</li>
+          </ul>
+          <p class="small-note" style="margin-top:0.5rem;">
+            Si el precio orientativo encaja contigo, escríbenos por WhatsApp y preparamos la información para buscar la empresa de mudanzas adecuada.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
     <section id="contacto">
-      <h2>Contacto directo</h2>
-      <p style="font-size:14px;">Si lo prefieres, puedes escribirnos directamente por WhatsApp o teléfono:</p>
-      <p style="font-size:14px; margin-top:6px;">
-        📞 695 465 862<br>
-        ✉️ info@movelink.es<br>
-        👤 Ricardo Alberto Conforme Aspiazu
+      <h2>Contacto MoveLink</h2>
+      <p class="section-intro">
+        Cuéntanos brevemente qué tipo de mudanza necesitas y te diremos cómo podemos ayudarte a encontrar empresa.
       </p>
-    </section>
 
-    <footer>
-      © <span id="year"></span> MOVE•LINK – Intermediario de mudanzas mediante código QR.
-    </footer>
+      <div class="contact-wrapper">
+        <div class="contact-box">
+          <h3>Escríbenos por WhatsApp</h3>
+          <p>
+            Envíanos un mensaje con esta información:
+          </p>
+          <ul class="list">
+            <li>Ciudad de origen y ciudad de destino.</li>
+            <li>Tipo de vivienda (piso, casa, trastero, oficina…).</li>
+            <li>Fecha aproximada de la mudanza.</li>
+            <li>Si necesitas desmontaje/montaje de muebles o servicios extra.</li>
+          </ul>
+
+          <a class="whatsapp-btn" href="https://wa.me/34695465862" target="_blank" rel="noopener">
+            <span class="icon">💬</span>
+            Hablar por WhatsApp
+          </a>
+
+          <p class="small-note">
+            Al hacer clic se abrirá una conversación directa con MoveLink en WhatsApp.
+          </p>
+        </div>
+
+        <div class="contact-box">
+          <h3>Otros datos de contacto</h3>
+          <p>Si lo prefieres, también puedes llamarnos o escribirnos directamente.</p>
+          <div class="contact-details">
+            <p><strong>Tel.:</strong> +34 695 465 862</p>
+            <p><strong>Nombre:</strong> Ricardo Alberto Conforme Aspiazu</p>
+          </div>
+          <p class="small-note">
+            MoveLink actúa como intermediario entre el cliente y la empresa de mudanzas. El servicio final de transporte
+            lo realiza siempre la empresa de mudanzas que acepte el trabajo.
+          </p>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <footer>
+    © <span id="year"></span> MoveLink · Intermediario de mudanzas · Sitio web en GitHub Pages
+  </footer>
+
   <script>
-    // Año automático
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Año automático en el pie de página
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Cálculo de presupuesto con precios competitivos
-    const form = document.getElementById('calc-form');
-    const kmInput = document.getElementById('km');
-    const tipoInput = document.getElementById('tipo');
-    const plantaInput = document.getElementById('planta');
-    const extrasInput = document.getElementById('extras');
-    const resultBox = document.getElementById('calc-result');
-    const kmError = document.getElementById('km-error');
+    // Calculadora de precio aproximado
+    function calcularPrecio() {
+      const tipo = document.getElementById("tipoMudanza").value;
+      const tamano = document.getElementById("tamanoMudanza").value;
+      const plantas = parseInt(document.getElementById("plantas").value || "0", 10);
+      const km = Math.max(1, parseInt(document.getElementById("kmAprox").value || "1", 10));
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+      const extraMontaje = document.getElementById("extraMontaje").checked;
+      const extraEmbalaje = document.getElementById("extraEmbalaje").checked;
+      const extraUrgente = document.getElementById("extraUrgente").checked;
 
-      const km = parseFloat(kmInput.value.replace(',', '.'));
-      const tipoFactor = parseFloat(tipoInput.value || '0');
-      const planta = parseInt(plantaInput.value || '0', 10);
-      const extras = parseFloat(extrasInput.value || '0');
+      // Precio base según tipo de mudanza
+      let base;
+      if (tipo === "local") base = 120;
+      else if (tipo === "provincial") base = 230;
+      else base = 420; // nacional
 
-      kmError.style.display = 'none';
+      // Factor por tamaño
+      let factorTamano = 1;
+      if (tamano === "media") factorTamano = 1.4;
+      if (tamano === "grande") factorTamano = 1.8;
 
-      if (!km || km <= 0) {
-        kmError.textContent = 'Introduce un número de kilómetros válido.';
-        kmError.style.display = 'block';
-        resultBox.style.display = 'none';
-        return;
-      }
-      if (!tipoFactor) {
-        resultBox.style.display = 'none';
-        alert('Selecciona un tipo de mudanza.');
-        return;
-      }
+      // Ajuste por kilómetros (a partir de 10 km)
+      const kmExtra = Math.max(0, km - 10);
+      const costeKm = tipo === "local" ? 1 : tipo === "provincial" ? 1.3 : 1.6;
 
-      // Fórmula competitiva:
-      // Base 35€ + (km * 0,70€ * factor tipo) + (planta * 8€ si no hay ascensor) + extras
-      const base = 35;
-      const porKm = km * 0.70 * tipoFactor;
-      const porPlanta = planta > 0 ? planta * 8 : 0;
-      let total = base + porKm + porPlanta + extras;
+      // Ajuste por plantas sin ascensor
+      let costePlantas = 0;
+      if (plantas === 1) costePlantas = 40;
+      if (plantas === 2) costePlantas = 80;
 
-      // Redondear al 5 más cercano para que quede "bonito"
-      total = Math.round(total / 5) * 5;
+      // Extras
+      let extras = 0;
+      if (extraMontaje) extras += 60;
+      if (extraEmbalaje) extras += 40;
+      if (extraUrgente) extras += 70;
 
-      resultBox.innerHTML =
-        '<strong>Presupuesto orientativo:</strong> ' +
-        total.toFixed(0) +
-        ' € (IVA incluido).' +
-        '<br><span style="font-size:12px; color:#555;">Precio aproximado según los datos introducidos. El presupuesto final puede variar tras confirmar la mudanza.</span>';
+      let precio = base * factorTamano + kmExtra * costeKm + costePlantas + extras;
 
-      resultBox.style.display = 'block';
-    });
+      // Redondeo “bonito”
+      precio = Math.round(precio / 10) * 10;
+
+      const resultado = document.getElementById("resultadoPrecio");
+      resultado.innerHTML =
+        "Precio orientativo: <strong>desde " +
+        precio.toLocaleString("es-ES") +
+        " €</strong><br><span style='font-size:0.8rem;color:#065f46;'>El precio final lo confirmará siempre la empresa de mudanzas una vez revisados todos los detalles.</span>";
+    }
   </script>
 </body>
 </html>
